@@ -18,7 +18,6 @@ app.get("/", (req, res) => {
 })
 
 app.get("/json", (req, res) => {
-    let 
   if (process.env.MESSAGE_STYLE === "uppercase") {
     res.json({ message: "HELLO JSON" })
   } else {
@@ -37,13 +36,15 @@ app.get(
   }
 )
 
-/** 9)  Get input from client - Route parameters */
-app.get("/:word/echo", (req, res)=>{
-    res.json({echo: req.params.word})
+app.get("/:word/echo", (req, res) => {
+  res.json({ echo: req.params.word })
 })
 
-/** 10) Get input from client - Query parameters */
-// /name?first=<firstname>&last=<lastname>
+app.route("/name").get((req, res) => {
+  console.log(req.query)
+  const { first: firstname, last: lastname } = req.query
+  res.json({ name: `${firstname} ${lastname}` })
+})
 
 /** 11) Get ready for POST Requests - the `body-parser` */
 // place it before all the routes !
