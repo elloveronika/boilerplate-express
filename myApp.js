@@ -13,6 +13,7 @@ var app = express();
 console.log("Hello World")
 
 /** 4) Serve static assets  */
+app.use(express.static(__dirname + "/public"))
 
 /** 3) Serve an HTML file */
 app.get('/', (req, res)=>{
