@@ -2,9 +2,7 @@ var express = require("express")
 var app = express()
 process.env.MESSAGE_STYLE = "uppercase"
 
-// --> 7)  Mount the Logger middleware here
-
-// --> 11)  Mount the body-parser middleware  here
+app.use(express.urlencoded({ extended: false }))
 
 app.use(express.static(__dirname + "/public"))
 
@@ -40,14 +38,16 @@ app.get("/:word/echo", (req, res) => {
   res.json({ echo: req.params.word })
 })
 
-app.route("/name").get((req, res) => {
-  console.log(req.query)
-  const { first: firstname, last: lastname } = req.query
-  res.json({ name: `${firstname} ${lastname}` })
-})
-
-/** 11) Get ready for POST Requests - the `body-parser` */
-// place it before all the routes !
+app
+  .route("/name")
+  .get((req, res) => {
+    const { first: firstname, last: lastname } = req.query
+    res.json({ name: `${firstname} ${lastname}` })
+  })
+  .post((req, res) => {
+    const { first: firstname, last: lastname } = req.body
+    res.json({ name: `${firstname} ${lastname}` })
+  })
 
 /** 12) Get data form POST  */
 
