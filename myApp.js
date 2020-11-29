@@ -12,18 +12,18 @@ var app = express();
 
 console.log("Hello World")
 
+/** 4) Serve static assets  */
+
 /** 3) Serve an HTML file */
 app.get('/', (req, res)=>{
     res.sendFile(`${__dirname}/views/index.html`)
 })
 
-
-
-/** 4) Serve static assets  */
-
-
 /** 5) serve JSON on a specific route */
-
+app.get('/json', (req, res)=>{
+    res.json('{"message": "Hello json"}')
+}
+)
 
 /** 6) Use the .env file to configure the app */
  
